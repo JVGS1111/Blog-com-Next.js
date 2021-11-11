@@ -12,8 +12,9 @@ import { FiCalendar } from "react-icons/fi";
 
 import { getMorePosts } from '../services/getMorePosts';
 
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+
+import Link from "next/link"
+import { formatDate } from '../util/formatDate';
 
 interface Post {
   uid?: string;
@@ -53,15 +54,7 @@ export default function Home({ postsPagination }: HomeProps) {
 
   }
 
-  function formatDate(date) {
-    return format(
-      new Date(date),
-      "d MMM yyyy",
-      {
-        locale: ptBR,
-      }
-    )
-  }
+
 
   if (!nextPage) {
     return (
@@ -69,14 +62,16 @@ export default function Home({ postsPagination }: HomeProps) {
 
         {
           posts.map(post => (
-            <div key={post.uid} className={styles.post}>
-              <h2>{post.data.title}</h2>
-              <p>{post.data.subtitle}</p>
-              <div className={styles.postInfo}>
-                <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
-                <span><FiUser size={20} /> {post.data.author}</span>
+            <Link href={`post/${post.uid}`}>
+              <div key={post.uid} className={styles.post}>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.subtitle}</p>
+                <div className={commonStyles.postInfo}>
+                  <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
+                  <span><FiUser size={20} /> {post.data.author}</span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))
         }
 
@@ -88,14 +83,16 @@ export default function Home({ postsPagination }: HomeProps) {
 
         {
           posts.map(post => (
-            <div key={post.uid} className={styles.post}>
-              <h2>{post.data.title}</h2>
-              <p>{post.data.subtitle}</p>
-              <div className={styles.postInfo}>
-                <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
-                <span><FiUser size={20} /> {post.data.author}</span>
+            <Link href={`post/${post.uid}`}>
+              <div key={post.uid} className={styles.post}>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.subtitle}</p>
+                <div className={commonStyles.postInfo}>
+                  <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
+                  <span><FiUser size={20} /> {post.data.author}</span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))
         }
 
@@ -116,6 +113,7 @@ export const getStaticProps: GetStaticProps = async () => {
       pageSize: 2,
     }
   );
+  console.log(postsResponse);
 
   const results = postsResponse.results.map(post => {
     return {

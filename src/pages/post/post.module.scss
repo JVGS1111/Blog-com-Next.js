@@ -1,1 +1,23 @@
-// TODO
+.content{
+    h1{
+        padding-top: 2.8rem;
+        font-size: 3.25rem;
+    }
+    p{
+        color:var(--gray-200);
+        line-height: 140%;
+    }
+    h2{
+        font-size: 2rem;
+        padding: 2.8rem 0 2.8rem 0;
+    }
+    
+}
+.banner{
+    img{
+        background-color: red;
+        
+        height: 400px;
+        width: 100%;
+    }
+}

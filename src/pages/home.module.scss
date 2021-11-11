@@ -9,20 +9,8 @@
         p{
             margin-top: 0.5rem;
         }
-        .postInfo{
-            margin-top: 1.25rem;
-            display: flex;
-            align-content: center;
-            align-items: center;
-            gap: 25px;
-        }
-        span,time{
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            
-        }
+        
+        
         & + .post{
             padding-top: 2rem;
         }
