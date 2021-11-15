@@ -37,7 +37,7 @@ Ao clicar em um post ele é carregado
 ##Sobre a arquitetura do projeto
 
 O projeto parece simples e de certo modo é, mas eu criei este projeto para estudar features do Next.js. 
-O React.js tem um problema de SEO por se tratar de uma lib SPA os navegadore tem dificuldade em indexar o conteúdo correto na web e o Next.js veio para resolver isso, o Next consegue organizar o conteúdo em páginas individuais podem assim utilizar a componentização do React e seus hooks em um projeto que precisa de SEO.
+O React.js tem um problema de SEO por se tratar de uma lib SPA os navegadores tem dificuldade em indexar o conteúdo correto na web e o Next.js veio para resolver isso, o Next consegue organizar o conteúdo em páginas individuais podem assim utilizar a componentização do React e seus hooks em um projeto que precisa de SEO.
 No projeto eu utilizei as funções getSaticProps e getSaticPaths para gerar páginas estáticas com o conteúdo já inserindo, assim possibilitando um melhor funcionamento do SEO.
 Também utilizei Prismic CMS para criação de posts.
 
