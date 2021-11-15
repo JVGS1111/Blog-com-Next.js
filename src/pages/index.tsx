@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import { useState } from 'react';
+import Head from "next/head"
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
@@ -58,46 +59,59 @@ export default function Home({ postsPagination }: HomeProps) {
 
   if (!nextPage) {
     return (
-      <main className={`${commonStyles.container} ${styles.postList}`}>
+      <>
+        <Head>
+          <title>spacetraveling</title>
+        </Head>
 
-        {
-          posts.map(post => (
-            <Link href={`post/${post.uid}`}>
-              <div key={post.uid} className={styles.post}>
-                <h2>{post.data.title}</h2>
-                <p>{post.data.subtitle}</p>
-                <div className={commonStyles.postInfo}>
-                  <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
-                  <span><FiUser size={20} /> {post.data.author}</span>
+        <main className={`${commonStyles.container} ${styles.postList}`}>
+
+          {
+            posts.map(post => (
+              <Link href={`post/${post.uid}`}>
+                <div key={post.uid} className={styles.post}>
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.subtitle}</p>
+                  <div className={commonStyles.postInfo}>
+                    <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
+                    <span><FiUser size={20} /> {post.data.author}</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))
-        }
+              </Link>
+            ))
+          }
 
-      </main>
+        </main>
+      </>
     )
   } else {
     return (
-      <main className={`${commonStyles.container} ${styles.postList}`}>
+      <>
+        <Head>
+          <title>spacetraveling</title>
 
-        {
-          posts.map(post => (
-            <Link href={`post/${post.uid}`}>
-              <div key={post.uid} className={styles.post}>
-                <h2>{post.data.title}</h2>
-                <p>{post.data.subtitle}</p>
-                <div className={commonStyles.postInfo}>
-                  <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
-                  <span><FiUser size={20} /> {post.data.author}</span>
+        </Head>
+
+        <main className={`${commonStyles.container} ${styles.postList}`}>
+
+          {
+            posts.map(post => (
+              <Link href={`post/${post.uid}`}>
+                <div key={post.uid} className={styles.post}>
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.subtitle}</p>
+                  <div className={commonStyles.postInfo}>
+                    <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
+                    <span><FiUser size={20} /> {post.data.author}</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))
-        }
+              </Link>
+            ))
+          }
 
-        <span className={styles.loadPosts} onClick={setNewPosts}>Carregar mais posts</span>
-      </main>
+          <span className={styles.loadPosts} onClick={setNewPosts}>Carregar mais posts</span>
+        </main>
+      </>
     )
   }
 

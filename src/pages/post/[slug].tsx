@@ -14,6 +14,7 @@ import { FiClock } from "react-icons/fi";
 import { RichText } from "prismic-dom"
 import { formatDate } from '../../util/formatDate';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 interface Post {
   uid?: string
@@ -64,37 +65,46 @@ export default function Post({ post }: PostProps) {
 
   if (router.isFallback) {
     return (
-      <main className={styles.loading}>
-        <div >Carregando...</div>
-      </main>
+      <>
+        <Head>
+          <title>{post.data.title} | spacetraveling</title>
+        </Head>
+        <main className={styles.loading}>
+          <div >Carregando...</div>
+        </main>
+      </>
     )
   } else {
     return (
-      <main >
-        <div className={styles.banner}>
-          <img src={post.data.banner.url} alt="banner" />
-        </div>
-        <article className={`${commonStyles.container} ${styles.content}`}>
-          <h1>{post.data.title}</h1>
-          <div className={commonStyles.postInfo}>
-            <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
-            <span><FiUser size={20} /> {post.data.author}</span>
-            <span><FiClock size={20} />{timeToRead} min</span>
+      <>
+        <Head>
+          <title>{post.data.title} | spacetraveling</title>
+        </Head>
+        <main >
+          <div className={styles.banner}>
+            <img src={post.data.banner.url} alt="banner" />
           </div>
-          {
-            post.data.content.map(el => {
-              let html = RichText.asHtml(el.body);
-              return (
-                <div key={post.data.title} className={styles.postContent}>
-                  <h2>{el.heading}</h2>
-                  <div dangerouslySetInnerHTML={{ __html: html }} />
-                </div>
-              )
-            })
-          }
-
-        </article>
-      </main>
+          <article className={`${commonStyles.container} ${styles.content}`}>
+            <h1>{post.data.title}</h1>
+            <div className={commonStyles.postInfo}>
+              <time><FiCalendar size={20} /> {formatDate(post.first_publication_date)}</time>
+              <span><FiUser size={20} /> {post.data.author}</span>
+              <span><FiClock size={20} />{timeToRead} min</span>
+            </div>
+            {
+              post.data.content.map(el => {
+                let html = RichText.asHtml(el.body);
+                return (
+                  <div key={post.data.title} className={styles.postContent}>
+                    <h2>{el.heading}</h2>
+                    <div dangerouslySetInnerHTML={{ __html: html }} />
+                  </div>
+                )
+              })
+            }
+          </article>
+        </main>
+      </>
     )
   }
 
